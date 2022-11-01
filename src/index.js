@@ -19,8 +19,11 @@ const initiateDb = async () => {
 
 const createInitialData = async () => {
 
-  const shirt = new Item({ description: 'A very nice button-down shirt', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] })
-  await shirt.save()
+  await Promise.all([
+    Item.create({ description: 'A very nice button-down shirt', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] }),
+    Item.create({ description: 'A pair of pants', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] }),
+    Item.create({ description: 'This is a dress', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] })
+  ])
   console.log('Finished creating initial data')
 }
 
