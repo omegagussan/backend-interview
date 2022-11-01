@@ -1,7 +1,11 @@
-const { model } = require('mongoose')
+const { model, Schema } = require('mongoose')
 
-const Item = model('Item', { description: String, images: [String] })
+const itemSchema = new Schema({
+  description: String,
+  images: [String]
+})
+
 
 module.exports = {
-  Item
+  Item: model('Item', itemSchema)
 }
