@@ -26,13 +26,15 @@ Your assignment is to create a REST API which supports a set of features describ
 
 The user-stories presented below are the first and most basic features for the marketplace application that you are about to create. They consist of three mandatory ones and two optional extra which you can do if you have time. The application should have two kinds of users: sellers and buyers. Sellers will upload items that the buyers can purchase. The application should handle three different currencies (SEK, EUR, DKK), and all items sold on the marketplace should be for sale in all three currencies at the same time. However, sellers should only handle their items in one currency. 
 
-### Features / User-stories (Mandatory)
+### Features / User-stories
+
+#### Mandatory
 
 1. As a seller I want to be able to sell an item for a specified amount and currency, and the item should be put up for sale in all currencies. Functionality for currency conversion already exists in the project.
 2. As a seller I want to be able to change the price for a currently selling item.
 3. As a buyer I want to be able to see what items are for sale and how much they cost in my currency.
 
-#### Extra (Optional)
+#### Optional
 
 4. As a buyer I want to be able to put an item in my cart. Two users cannot have the same item in their cart at the same time.
 5. As a buyer I want to be able to see an overview of my cart (what items are in there, how much they cost and how much my whole cart cost in my local currency)
