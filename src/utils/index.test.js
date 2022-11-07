@@ -3,7 +3,7 @@ const { convert } = require('.')
 
 describe('correct conversion between currencies', () => {
   test('Unsupported currencies are handled', () => {
-    expect(convert({ value: 10, currency: 'SEK' })('NOK')).toThrow('Non-supported currency')
+    expect(() => convert({ value: 10, currency: 'SEK' })('NOK')).toThrowError('Non-supported currency')
   })
 
   test('Converts SEK <-> EUR correct', () => {
