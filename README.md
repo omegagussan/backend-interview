@@ -36,7 +36,7 @@ The user-stories presented below are the first and most basic features for the m
 
 #### Optional
 
-4. As a buyer I want to be able to put an item in my cart. Two users cannot have the same item in their cart at the same time.
+4. As a buyer I want to be able to put an item in my cart. An item can only be in one cart at a time.
 5. As a buyer I want to be able to see an overview of my cart (what items are in there, how much they cost and how much my whole cart cost in my local currency)
 
 ### Notes
