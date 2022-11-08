@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const { Item } = require('./models')
 const routes = require('./routes')
 const { initiateMongoose, createInitialData } = require('./database')
 
@@ -10,9 +9,6 @@ initiateMongoose()
 createInitialData()
 
 app.use(express.json())
-app.get('/item', async (req, res) => {
-  res.send(await Item.find({}))
-})
 
 routes(app)
 
