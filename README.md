@@ -41,7 +41,7 @@ The user-stories presented below are the first and most basic features for the m
 
 ### Notes
 
-- You can populate the database with some initial data on startup if you want (some items are probably needed to start things off).
+- You can populate the database with some initial data on startup if you want (some items are probably needed to start things off). There is also a `src/dropDb.js` script if you at any time want to reset the database and start from scratch.
 - You should take into account that the price a seller chooses for an item is not necessarily the price that a buyer pays. The prices can differ due to e.g. promo codes where the marketplace steps in and pays the seller the difference.
 - Your application does not need to handle user accounts. It's OK that all API endpoints are available to everyone
 
