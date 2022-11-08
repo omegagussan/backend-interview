@@ -30,6 +30,7 @@ const dropDb = async () => {
   await mongoose.connection.dropDatabase()
   await mongoose.connection.close()
   await mongod.stop()
+  console.log('Database dropped')
 }
 
 const createInitialData = async () => {
