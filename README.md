@@ -13,8 +13,8 @@ Fork the repository (see top-right button on GitHub) and clone the fork to your 
 ### To start the backend:
 
 - Navigate to the project's root
-- Run 'npm ci'
-- Run 'npm start'
+- Run `npm ci`
+- Run `npm start`
 
 We recommend using [Postman](https://www.postman.com/) for calling the API endpoints.
 
@@ -22,7 +22,7 @@ We recommend using [Postman](https://www.postman.com/) for calling the API endpo
 
 If you don't have a favorite editor we highly recommend VSCode. We've also had some ESLint rules set up which will help you catch bugs etc. If you're using VSCode, install the regular ESLint plugin and you should be good to go!
 
-The version of the package-lock.json files is v2, so use node v16 or higher to not introduce unnecessary changes. Just run nvm use if you have nvm installed.
+The version of the package-lock.json files is v2, so use node v16 or higher to not introduce unnecessary changes. Just run `nvm use` if you have nvm installed.
 
 ## Assignment
 
