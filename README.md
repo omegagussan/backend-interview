@@ -35,13 +35,14 @@ The user-stories presented below are the first and most basic features for the m
 #### Mandatory
 
 1. As a seller I want to be able to sell an item for a specified amount and currency, and the item should be put up for sale in all currencies. Functionality for currency conversion already exists in the project.
-2. As a seller I want to be able to change the price for a currently selling item. Previous item price should still be stored by the application.
+2. As a seller I want to be able to change the price for a currently selling item.
 3. As a buyer I want to be able to see what items are for sale and how much they cost in my currency.
 
 #### Optional
 
 4. As a buyer I want to be able to put an item in my cart. An item can only be in one cart at a time.
 5. As a buyer I want to be able to see an overview of my cart (what items are in there, how much they cost and how much my whole cart cost in my local currency)
+6. As a seller I want to see the price history of my item.
 
 ### Notes
 
