@@ -13,7 +13,7 @@ const CONVERSION_RATES = {
   }
 }
 
-const convert = ({ value, currency }) => (toCurrency) => {
+const convert = (toCurrency) => ({ value, currency }) => {
   if (!value || !currency) throw new Error('value and currency is required for conversion')
   const rate = CONVERSION_RATES[currency]?.[toCurrency]
   if (!rate) throw new Error('Non-supported currency')
