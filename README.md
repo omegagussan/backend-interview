@@ -22,7 +22,7 @@ We recommend using [Postman](https://www.postman.com/) for calling the API endpo
 
 If you don't have a favorite editor we highly recommend VSCode. We've also had some ESLint rules set up which will help you catch bugs etc. If you're using VSCode, install the regular ESLint plugin and you should be good to go!
 
-To use the correct Node version look at the `engines` properties in the `package.json` file. If you are using nvm ust run `nvm use` and the correct version wil be used.
+To use the correct Node version look at the `engines` properties in the `package.json` file. If you are using nvm just run `nvm use` and the correct version wil be used.
 
 ## Assignment
 
