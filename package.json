@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "npm": "10",
+    "node": "20"
+  },
   "scripts": {
     "lint": "eslint --ext .js src",
     "start": "nodemon --ignore 'data/*' src/index.js",
