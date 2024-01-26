@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const { convert } = require('.')
+const { convert, transform } = require('.')
 
 describe('correct conversion between currencies', () => {
   test('Unsupported currencies are handled', () => {
@@ -18,5 +18,29 @@ describe('correct conversion between currencies', () => {
   test('Converts EUR <-> DKK correct', () => {
     expect(convert('DKK')({ value: 25, currency: 'EUR'})).toEqual({ value: 192.31, currency: 'DKK' })
     expect(convert('EUR')({ value: 192.31, currency: 'DKK'})).toEqual({ value: 25, currency: 'EUR' })
+  })
+})
+
+describe('transforming items', () => {
+  test('to DKK', () => {
+    const given = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    const expected = [{ asking_price: '70 DKK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    expect(transform('Denmark', given)).toEqual(expected)
+  })
+
+  test('to EURO', () => {
+    const given = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    const expected = [{ asking_price: '10 EUR', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    expect(transform('Finland', given)).toEqual(expected)
+  })
+
+  test('to SEK -- no transform needed', () => {
+    const given = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    expect(transform('Sweden', given)).toEqual(given)
+  })
+
+  test('to SEK -- case insensative paths', () => {
+    const given = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    expect(transform('SWEDen', given)).toEqual(given)
   })
 })

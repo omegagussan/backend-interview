@@ -107,3 +107,4 @@ dist
 data/*
 !data/placeholder.txt
 
+.idea
