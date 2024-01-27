@@ -5,7 +5,7 @@ describe('Buyer', () => {
     describe('getItems', () => {
         test('should return prices from the specified market', async () => {
             const mockItems = [{ name: 'Item 1', asking_price: "1 SEK" }];
-            const expected = transform("DENMARK", mockItems)
+            const expected = [{ name: 'Item 1', price: "0.7 DKK" }]
 
             const buyer = new Buyer({
                     Item: {
@@ -13,10 +13,7 @@ describe('Buyer', () => {
                     }
                 });
 
-            const result = await buyer.getItems("DENMARK");
-
-            //expect(fetchData()).resolves.toBe('peanut butter');
-            expect(result).toEqual(expected);
+            await expect(buyer.getItems("DENMARK")).resolves.toEqual(expected);
         });
         test('nothing was found', async () => {
 
