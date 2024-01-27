@@ -24,11 +24,10 @@ const convert = (toCurrency) => ({ value, currency }) => {
 
 const transform = (market, items) => {
   let target_currency = currencyFromMarket(market)
-
   return items
   .map(i => {
+    if (!target_currency || ! i['asking_price']) return undefined; //invalid from database removed
     const [value, currency] = i['asking_price'].split(" ");
-    if (!target_currency) return undefined; //invalid from database removed
     if (currency === target_currency) return i;
     const asking_price = convert(target_currency)({value, currency})
     return {...i, 'asking_price': asking_price.value + " " + asking_price.currency}
