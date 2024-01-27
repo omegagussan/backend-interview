@@ -1,4 +1,4 @@
-const { Markets } = require("./markets")
+const { markets } = require("./market")
 
 const CONVERSION_RATES = {
   SEK: {
@@ -23,26 +23,33 @@ const convert = (toCurrency) => ({ value, currency }) => {
 }
 
 const transform = (market, items) => {
-  let target_currency;
-  switch(market.toUpperCase()){
-    case Markets.Denmark:
-      target_currency = "DKK"
-      break;
-    case Markets.Sweden:
-      target_currency = "SEK"
-      break;
-    case Markets.Finland:
-      target_currency = "EUR"
-      break;
-  }
-  console.error(target_currency)
+  let target_currency = currencyFromMarket(market)
 
-  return items.map(i => {
+  return items
+  .map(i => {
     const [value, currency] = i['asking_price'].split(" ");
+    if (!target_currency) return undefined; //invalid from database removed
     if (currency === target_currency) return i;
     const asking_price = convert(target_currency)({value, currency})
     return {...i, 'asking_price': asking_price.value + " " + asking_price.currency}
-  });
+  })
+  .filter(i => !!i);
+}
+
+const currencyFromMarket = (value) => {
+  let target_currency;
+  switch (value.toUpperCase()) {
+    case markets.Denmark:
+      target_currency = "DKK"
+      break
+    case markets.Sweden:
+      target_currency = "SEK"
+      break
+    case markets.Finland:
+      target_currency = "EUR"
+      break
+  }
+  return target_currency
 }
 
 module.exports = {

@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "79237fd8-f479-43ad-b9c4-02c242735702",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20190212"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/item",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/market/finland/item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/market/finland/item",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"market",
+						"finland",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/market/sweden/item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/market/sweden/item",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"market",
+						"sweden",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/market/aruba/item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/market/aruba/item",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"market",
+						"aruba",
+						"item"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

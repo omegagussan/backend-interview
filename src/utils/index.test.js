@@ -34,12 +34,18 @@ describe('transforming items', () => {
     expect(transform('Finland', given)).toEqual(expected)
   })
 
-  test('to SEK -- no transform needed', () => {
+  test('to SEK', () => {
+    const given = [{ asking_price: '10 EUR', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    const expected = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
+    expect(transform('Sweden', given)).toEqual(expected)
+  })
+
+  test('no transform needed', () => {
     const given = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
     expect(transform('Sweden', given)).toEqual(given)
   })
 
-  test('to SEK -- case insensative paths', () => {
+  test('case insensative paths', () => {
     const given = [{ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.jpg`]}]
     expect(transform('SWEDen', given)).toEqual(given)
   })
