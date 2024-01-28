@@ -1,4 +1,3 @@
-const { transform } = require('../utils');
 const { Buyer } = require('./buyer');
 
 describe('Buyer', () => {

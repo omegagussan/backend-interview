@@ -12,9 +12,11 @@ class Seller {
     async update(id, item){
         item.__v; // ensure, there is no __v in the update object, otherwise it would be editied twice => error
         item.$inc = { __v: 1};
-        const old = await this.Item.findOne({_id: id}) //read before write to persist history
-        item.asking_price = [...old.toObject()['asking_price'], item.asking_price]
-        return await this.Item.findOneAndUpdate({_id: id}, item, {new: true});
+        const findOne = await this.Item.findOne({_id: id}) //read before write to persist history
+        const old = findOne.toObject();
+        item.asking_price = [...old.asking_price, item.asking_price]
+        const updated = await this.Item.findOneAndUpdate({_id: id}, item, {new: true});
+        return updated.toObject();
     }
 
     async priceHistory(id){
