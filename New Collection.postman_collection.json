@@ -83,6 +83,108 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "localhost:3000/item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"asking_price\": \"100 SEK\", \n      \"description\": \"this is ingested\", \n      \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/item",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/item (bad data)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"this is ingested\", \n    \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/item",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/item/65b57c291ef96d3a853d9e9c (update)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"asking_price\": \"100 EUR\", \n      \"description\": \"this is updated\", \n      \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/item/65b57c291ef96d3a853d9e9c",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"item",
+						"65b57c291ef96d3a853d9e9c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/item/65b62ee8f93c99898aaaf30e/history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/item/65b62ee8f93c99898aaaf30e/history",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"item",
+						"65b62ee8f93c99898aaaf30e",
+						"history"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

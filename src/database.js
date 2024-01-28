@@ -36,9 +36,9 @@ const dropDb = async () => {
 const createInitialData = async () => {
   if ((await Item.find({})).length === 0) {
     await Promise.all([
-      Item.create({ asking_price: '100 SEK', description: 'A very nice button-down shirt', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] }),
-      Item.create({ asking_price: '100 DKK', description: 'A pair of pants', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] }),
-      Item.create({ asking_price: '10 EUR', description: 'This is a dress', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] })
+      Item.create({ asking_price: ['100 SEK'], description: 'A very nice button-down shirt', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] }),
+      Item.create({ asking_price: ['100 DKK'], description: 'A pair of pants', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] }),
+      Item.create({ asking_price: ['10 EUR'], description: 'This is a dress', images: [`http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`, `http://example.image-${crypto.randomBytes(4).toString('hex')}.jpg`] })
     ])
     console.log('Finished creating initial data')
   }

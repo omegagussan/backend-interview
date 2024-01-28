@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const { convert, transform } = require('.')
+const { convert, transform, allSet } = require('.')
 
 describe('correct conversion between currencies', () => {
   test('Unsupported currencies are handled', () => {
@@ -18,6 +18,21 @@ describe('correct conversion between currencies', () => {
   test('Converts EUR <-> DKK correct', () => {
     expect(convert('DKK')({ value: 25, currency: 'EUR'})).toEqual({ value: 192.31, currency: 'DKK' })
     expect(convert('EUR')({ value: 192.31, currency: 'DKK'})).toEqual({ value: 25, currency: 'EUR' })
+  })
+})
+
+describe('setAll', () => {
+  test('isTruthy', () => {
+    expect(allSet({"a": 1})).toEqual(true);
+  })
+  test('isTruthy', () => {
+    expect(allSet({"b": []})).toEqual(true);
+  })
+  test('isFalsy', () => {
+    expect(allSet({"a": 0})).toEqual(false);
+  })
+  test('isFalsy', () => {
+    expect(allSet({"c": ""})).toEqual(false);
   })
 })
 

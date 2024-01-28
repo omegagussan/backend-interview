@@ -51,7 +51,14 @@ const currencyFromMarket = (value) => {
   return target_currency
 }
 
+const all = (arr, fn = Boolean) => arr.every(fn);
+
+const allSet = (item) => {
+  return all(Object.values(item), i => !!i);
+}
+
 module.exports = {
   convert,
-  transform
+  transform,
+  allSet
 }

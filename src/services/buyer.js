@@ -1,5 +1,5 @@
 const { Item } = require('../models');
-const { transform } = require('./../utils') //not injected as no point to fake
+const { transform } = require('../utils') //not injected as no point to fake
 
 class Buyer {
     constructor(dependencies = {Item}){
@@ -8,10 +8,11 @@ class Buyer {
 
     async getItems(market){
         const mongooseResults = await this.Item.find({})
-        const results = mongooseResults.map(r => r.toObject());
+
+        //gets the last price from a list of prices
+        const results = mongooseResults.map(r => r.toObject()).map(r => ({...r, asking_price: r.asking_price.slice(-1)[0]}));
         const transformed_results = transform(market, results);
         //You should take into account that the price a seller chooses for an item is not necessarily the price that a buyer pays.
-        //The prices can differ due to e.g. temporary price reductions where the marketplace steps in and pays the seller the difference.
         return transformed_results.map(r => {
             delete Object.assign(r, {['price']: r['asking_price'] })['asking_price'];
             return r;

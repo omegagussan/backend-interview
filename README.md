@@ -48,3 +48,19 @@ The user-stories presented below are the first and most basic features for the m
 
 - Your application does not need to handle user accounts. It's OK that all API endpoints are available to everyone
 - You can populate the database with some initial data on startup if you want (some items are probably needed to start things off). There is also a script (`npm run drop-db`) if you at any time want to reset the database and start from scratch.
+
+
+## Solution thoughts.
+Tradeoffs for implementing price history now that I know more of the mongoose of the __v field. By default prior version of an object are not persisted. Which makes sense as then no longer would the id field be unique but rather the combination of (version, id) would be what is the index.
+
+Our options are then either keeping a list of prices on the ITEM object, where only the latest is returned by the /market/:market/item endpoint! Easy enough.
+
+The drawback is that when updating we need to perform a read before write to ensure we append to the list of prices when someone submits the new item, rather then just replacing it (maybe slightly missleading for a PUT... technically that more like a PATCH). In general I tend to favor PATCH ahead of PUT as the backend owns more of the state. Any missing fields in the update are not UNSET but rather keep -- which helps keep the frontned thin.
+
+The other option is that every PUT creates a new object under the hood with a new __id field. This will make the query for getting the market/:market/item endpoint more complex. As we need to store the "original created id" in the object and make a filter for it. Once we get all the results, we return the one with the highest __v value.
+
+The benifits of this solution is that we have history for all fields, not just prices. We also get nice metadata from the MongoDB like when it was created etc.
+
+However since ONLY price history is asked for -- and we will create fewer documents in the database. As well that its better to optimize for the serach path instead of the create path (assumption items are serached for more then created) I think the first option is better. Typically a tradeoff discussion to have in a team!
+
+How to implement carts? New "collection" in mongoose where every ITEM knows what cart it belongs to (ensures only one person can have it their cart, return 400 if someone else tries to add it from a old cached view of the webpage). Carts api looks something like GET /cart/ (obs no POST) If there is nothing stored with your user-cookies as token. implicity create one behind the scenes thats empty for that user (server owns state). Overview of item in cart is simply this endpoint. Ensuring that any REMOVAL or additions to cart is handled by also mutating the items involved (this may seem absurt but since only item can be owned by one its ok). Basically this implies there is a PUT /cart only. Deletes are hanleded by putting a smaller list there.
