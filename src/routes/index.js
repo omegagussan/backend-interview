@@ -11,10 +11,38 @@ const parseItem = (body) => {
 //TODO: replace console.error() with logger framework
 
 module.exports = (app) => {
-  //more like an internal debug endpoint returning raw state from Mongoose
+/**
+ * @swagger
+ * /item:
+ *   get:
+ *     description:  Internal debug endpoint returning raw state from Mongoose. Unpaignated from the database.
+ */
   app.get('/item', async (req, res) => {
     res.status(200).send(await Item.find({}))
   })
+
+  /**
+   * @swagger
+   * /item/{id}/history:
+   *   get:
+   *     description:  Get the price history by id
+   *     parameters:
+   *      - in: path
+   *        name: id
+   *        schema:
+   *          type: string
+   *        required: true
+   *     responses:
+   *          '200':
+   *              description: history!
+   *              content:
+   *                  'application/json':
+   *                      schema:
+   *                          type: array
+   *                          description: list of prices
+   *          '403':
+   *              description: Not enough permissions
+   */
 
   app.get('/item/:id/history', async (req, res) => {
     res.status(200).send(await sellerSingelton.priceHistory(req.params.id))

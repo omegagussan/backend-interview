@@ -64,3 +64,6 @@ The benifits of this solution is that we have history for all fields, not just p
 However since ONLY price history is asked for -- and we will create fewer documents in the database. As well that its better to optimize for the serach path instead of the create path (assumption items are serached for more then created) I think the first option is better. Typically a tradeoff discussion to have in a team!
 
 How to implement carts? New "collection" in mongoose where every ITEM knows what cart it belongs to (ensures only one person can have it their cart, return 400 if someone else tries to add it from a old cached view of the webpage). Carts api looks something like GET /cart/ (obs no POST) If there is nothing stored with your user-cookies as token. implicity create one behind the scenes thats empty for that user (server owns state). Overview of item in cart is simply this endpoint. Ensuring that any REMOVAL or additions to cart is handled by also mutating the items involved (this may seem absurt but since only item can be owned by one its ok). Basically this implies there is a PUT /cart only. Deletes are hanleded by putting a smaller list there.
+
+## Interesting projects
+https://www.npmjs.com/package/swagger-express-router => generate routes from swagger documentation
