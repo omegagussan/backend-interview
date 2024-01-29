@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const { isValid } = require('./market')
+const { isValid, currencyFromMarket } = require('./market')
 
 describe('validating market', () => {
   test('Denmark', () => {
@@ -8,5 +8,15 @@ describe('validating market', () => {
 
   test('Aruba', () => {
     expect(isValid('Aruba')).toEqual(false)
+  })
+})
+
+describe('get currency from market', () => {
+  test('Denmark', () => {
+    expect(currencyFromMarket('Denmark')).toEqual("DKK")
+  })
+
+  test('Aruba', () => {
+    expect(() => currencyFromMarket('Aruba')).toThrow('Invalid market')
   })
 })

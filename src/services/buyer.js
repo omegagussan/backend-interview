@@ -1,6 +1,8 @@
 const { Item } = require('../models');
-const { transform } = require('../utils') //not injected as no point to fake
 
+const get_last = (arr) => {
+    return arr.slice(-1)[0];
+}
 class Buyer {
     constructor(dependencies = {Item}){
         this.Item = dependencies.Item;
@@ -9,14 +11,14 @@ class Buyer {
     async getItems(market){
         const mongooseResults = await this.Item.find({})
 
-        //gets the last price from a list of prices
-        const results = mongooseResults.map(r => r.toObject()).map(r => ({...r, asking_price: r.asking_price.slice(-1)[0]}));
-        const transformed_results = transform(market, results);
-        //You should take into account that the price a seller chooses for an item is not necessarily the price that a buyer pays.
-        return transformed_results.map(r => {
-            delete Object.assign(r, {['price']: r['asking_price'] })['asking_price'];
-            return r;
-        })
+        //gets the last price from price_history
+        // key out the relevant currency from prices!
+        return mongooseResults.map(r => r.toObject())
+        .map(r => {
+            const price = get_last(r.price_history)
+            delete r.price_history;
+            return {...r, price: price[market]}
+        });
     }
 }
 
