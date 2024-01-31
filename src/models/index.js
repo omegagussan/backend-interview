@@ -36,5 +36,7 @@ const itemSchema = new Schema({
 })
 
 module.exports = {
-  Item: model('Item', itemSchema)
+  Item: model('Item', itemSchema),
+  Price: model('Price', priceSchema),
+  RegionalisedPrices: model('RegionalisedPrices', regionalisedPrices)
 }

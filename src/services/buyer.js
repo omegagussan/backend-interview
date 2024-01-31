@@ -16,6 +16,8 @@ class Buyer {
         return mongooseResults.map(r => r.toObject())
         .map(r => {
             const price = get_last(r.price_history)
+            console.log("r", r)
+            console.log("price", price)
             delete r.price_history;
             return {...r, price: price[market]}
         });

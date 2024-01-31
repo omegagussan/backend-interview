@@ -15,9 +15,28 @@ module.exports = (app) => {
  * /item:
  *   get:
  *     description:  Internal debug endpoint returning raw state from Mongoose. Unpaignated from the database.
+ *     responses:
+ *          '200':
+ *              description: price history by id in desired market
+ *              content:
+ *                  'application/json':
+ *                      schema:
+ *                          type: object
+ *                          description: response containing list of items
+ *                          properties:
+ *                             items:
+ *                               type: array
  */
   app.get('/item', async (req, res) => {
-    res.status(200).send(await Item.find({}))
+    res.status(200).send({items: await Item.find({}).populate({
+        path: 'price_history',
+        model: 'RegionalisedPrices',
+        populate: {
+          path: 'prices',
+          model: 'Price'
+        }
+      })
+    })
   })
 
   /**
@@ -42,16 +61,19 @@ module.exports = (app) => {
    *              content:
    *                  'application/json':
    *                      schema:
-   *                          type: array
+   *                          type: object
    *                          description: list of prices
-   *          '40':
+   *                          properties:
+   *                              items:
+   *                                 type: array
+   *          '400':
    *              description: Bad request
    */
 
   app.get('/market/:market/item/:id/history', async (req, res) => {
     try {
       const currency = currencyFromMarket(req.params.market)
-      res.status(200).send(await sellerSingelton.priceHistory(req.params.id, currency))
+      res.status(200).send({prices: await sellerSingelton.priceHistory(req.params.id, currency)})
     } catch (error) {
       if (error.message == "Invalid market") return res.status(400).json({ message: `market ${req.params.market} is not valid.` })
       console.error(error)
@@ -63,9 +85,9 @@ module.exports = (app) => {
     try {
       const item = parseItem(req.body);
       //if (!allSet(item)) return res.status(400).json({ message: `item is not valid.`, item})
+      //'price_history.0.prices.SEK.amount': ValidatorError: Path `amount` is required.
       res.status(200).send(await sellerSingelton.create(item))
     } catch (error) {
-      if (!allSet(item)) return res.status(400).json({ message: `item is not valid.`, item})
       console.error(error)
       return res.status(500).json({ message: "Internal server error." })
     }
@@ -86,7 +108,7 @@ module.exports = (app) => {
   app.get('/market/:market/item', async (req, res) => {
     try {
         const currency = currencyFromMarket(req.params.market)
-        res.status(200).send(await buyerSingelton.getItems(market))
+        res.status(200).send(await buyerSingelton.getItems(currency))
       } catch (error) {
         if (error.message == "Invalid market") return res.status(400).json({ message: `market ${req.params.market} is not valid.` })
         console.error(error)
