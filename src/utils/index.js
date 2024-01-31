@@ -31,7 +31,6 @@ const convertAll = (asking_price) => {
       allPrices.set(currency, asking_price)
     }
   })
-  console.log(allPrices)
   return allPrices
 }
 

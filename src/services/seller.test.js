@@ -29,15 +29,16 @@ describe('Seller', () => {
     });
     describe('update', () => {
         test('should append a new item to the price history', async () => {
-            const oldItem = { name: 'Item 1', price_history: [{SEK: {value: 1, currency: "SEK"}}]};
+            const oldItem = { name: 'Item 1', price_history: [{}]};
             const mockedReturn = {
                 name: 'Item 1',
                 price_history: [
-                    {SEK: {value: 1, currency: "SEK"}},
-                    {
-                        SEK: {value: 100, currency: "SEK"},
-                        DKK: {value: 70, currency: "DKK"},
-                        EUR: {value: 10, currency: "EUR"}
+                    {},
+                    { prices: new Map([
+                        ["SEK", {value: 100, currency: "SEK"}],
+                        ["DKK", {value: 70, currency: "DKK"}],
+                        ["EUR", {value: 10, currency: "EUR"}]
+                    ])
                     }
                 ]
             };
@@ -45,7 +46,8 @@ describe('Seller', () => {
 
             const seller = new Seller({
                 Item: {
-                    findOne: jest.fn().mockResolvedValue({ toObject: () => oldItem }),
+                    findOne: jest.fn().mockReturnThis(),
+                    populate: jest.fn().mockResolvedValue({ toObject: () => oldItem}),
                     findOneAndUpdate: jest.fn().mockResolvedValue({ toObject: () => mockedReturn }),
                 }
             });
@@ -60,16 +62,17 @@ describe('Seller', () => {
     describe('get price history', () => {
         test('price history gets prices by currency', async () => {
             const mockItem = { name: 'Item 1', price_history: [
-                {SEK: {value: 1, currency: "SEK"}, DKK: {}},
-                {SEK: {value: 100, currency: "SEK"}, DKK: {}}
+                {prices: new Map([["SEK", {value: 1, currency: "SEK"}]])},
+                {prices: new Map([["SEK", {value: 100, currency: "SEK"}]])}
             ]};
 
             const seller = new Seller({
                     Item: {
-                        findOne: jest.fn().mockResolvedValue({ toObject: () => mockItem }),
+                        findOne: jest.fn().mockReturnThis(),
+                        populate: jest.fn().mockResolvedValue({ toObject: () => mockItem}),
                     }
                 });
-            await expect(seller.priceHistory("id", "SEK")).resolves.toEqual(mockItem.price_history.map(p => p["SEK"]));
+            await expect(seller.priceHistory("id", "SEK")).resolves.toEqual(mockItem.price_history.map(p => p.prices.get("SEK")));
         });
     });
 });
