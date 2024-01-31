@@ -7,10 +7,11 @@ class Seller {
     }
 
     async create(item){
-        const saveableItem = convertAll(item);
-        const price_history = [saveableItem.price]
-        delete saveableItem.price;
-        return await this.Item.create({...saveableItem, price_history})
+        //TODO: cast this error to Valdiation error as the data is not parsable
+        const regionalisedPrices = convertAll(item.asking_price);
+        const price_history = [{prices: regionalisedPrices}]
+        delete item.asking_price;
+        return await this.Item.create({...item, price_history})
     }
 
     async update(id, item){

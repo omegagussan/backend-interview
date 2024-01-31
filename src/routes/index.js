@@ -84,10 +84,9 @@ module.exports = (app) => {
   app.post('/item', async (req, res) => {
     try {
       const item = parseItem(req.body);
-      //if (!allSet(item)) return res.status(400).json({ message: `item is not valid.`, item})
-      //'price_history.0.prices.SEK.amount': ValidatorError: Path `amount` is required.
       res.status(200).send(await sellerSingelton.create(item))
     } catch (error) {
+      if(error.message.includes("ValidatorError")) return res.status(400).json({ message: `item is not valid.`, error})
       console.error(error)
       return res.status(500).json({ message: "Internal server error." })
     }

@@ -6,10 +6,11 @@ describe('Seller', () => {
             const expected = {
                 name: 'Item 1',
                 price_history: [
-                    {
-                        SEK: {value: 1, currency: "SEK"},
-                        DKK: {value: 0.7, currency: "DKK"},
-                        EUR: {value: 0.1, currency: "EUR"}
+                    {   prices : new Map([
+                        ["SEK", {value: 1, currency: "SEK"}],
+                        ["DKK", {value: 0.7, currency: "DKK"}],
+                        ["EUR", {value: 0.1, currency: "EUR"}]
+                        ])
                     }
                 ]
             };

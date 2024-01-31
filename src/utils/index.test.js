@@ -21,8 +21,8 @@ describe('correct conversion between currencies', () => {
   })
 
   test('convertAll', () => {
-    const given = { name: 'Item 1', asking_price: { value: 25, currency: 'SEK' } }
-    const all_prices = { SEK: { value: 25, currency: 'SEK' }, EUR: { value: 2.5, currency: 'EUR' }, DKK: { value: 17.5, currency: 'DKK' }}
-    expect(convertAll(given)).toEqual({ name: 'Item 1', price: all_prices})
+    const given = { value: 25, currency: 'SEK' }
+    const all_prices = new Map([["SEK", { value: 25, currency: 'SEK' }], ["EUR", { value: 2.5, currency: 'EUR' }], ["DKK", { value: 17.5, currency: 'DKK'}]])
+    expect(convertAll(given)).toEqual(all_prices)
   })
 })

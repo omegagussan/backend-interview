@@ -22,17 +22,17 @@ const convert = (toCurrency) => ({ value, currency }) => {
   return { value: Math.round(value * rate * 100) / 100, currency: toCurrency }
 }
 
-const convertAll = (item) => {
-  const allPrices = {}
+const convertAll = (asking_price) => {
+  const allPrices = new Map()
   Object.keys(CONVERSION_RATES).map(currency => {
-    if (currency !== item.asking_price.currency){
-      allPrices[currency] = convert(currency)(item.asking_price)
+    if (currency !== asking_price.currency){
+      allPrices.set(currency, convert(currency)(asking_price))
     } else {
-      allPrices[currency] = item.asking_price
+      allPrices.set(currency, asking_price)
     }
   })
-  delete item['asking_price'];
-  return {...item, price: allPrices}
+  console.log(allPrices)
+  return allPrices
 }
 
 module.exports = {
