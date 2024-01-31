@@ -8,18 +8,23 @@ class Buyer {
         this.Item = dependencies.Item;
     }
 
-    async getItems(market){
-        const mongooseResults = await this.Item.find({})
+    async getItems(currency){
+        const mongooseResults = await this.Item.find({}).populate({
+            path: 'price_history',
+            model: 'RegionalisedPrices',
+            populate: {
+              path: 'prices',
+              model: 'Price'
+            }
+          })
 
         //gets the last price from price_history
         // key out the relevant currency from prices!
         return mongooseResults.map(r => r.toObject())
         .map(r => {
             const price = get_last(r.price_history)
-            console.log("r", r)
-            console.log("price", price)
             delete r.price_history;
-            return {...r, price: price[market]}
+            return {...r, price: price.prices.get(currency)}
         });
     }
 }

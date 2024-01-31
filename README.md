@@ -67,3 +67,6 @@ How to implement carts? New "collection" in mongoose where every ITEM knows what
 
 ## Interesting projects
 https://www.npmjs.com/package/swagger-express-router => generate routes from swagger documentation
+
+## TODO
+Add dockerfile to support E2E test via API with dedicated instance of mongodb as separate container
