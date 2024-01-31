@@ -16,9 +16,9 @@ const CONVERSION_RATES = {
 }
 
 const convert = (toCurrency) => ({ value, currency }) => {
-  if (!value || !currency) throw new Error('value and currency is required for conversion')
+  if (!value || !currency) throw new Error('ValidatorError: value and currency is required for conversion')
   const rate = CONVERSION_RATES[currency]?.[toCurrency]
-  if (!rate) throw new Error('Non-supported currency')
+  if (!rate) throw new Error('ValidatorError: Non-supported currency')
   return { value: Math.round(value * rate * 100) / 100, currency: toCurrency }
 }
 

@@ -91,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n      \"asking_price\": \"100 SEK\", \n      \"description\": \"this is ingested\", \n      \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
+					"raw": "{\n      \"asking_price\": {\"value\": \"100\", \"currency\": \"SEK\"}, \n      \"description\": \"this is ingested\", \n      \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -145,7 +145,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n      \"asking_price\": \"100 EUR\", \n      \"description\": \"this is updated\", \n      \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
+					"raw": "{\n      \"asking_price\": {\"value\": \"1\", \"currency\": \"EUR\"}, \n      \"description\": \"this is updated\", \n      \"images\": [\"www.google.se\", \"www.bling.com\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -153,14 +153,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/item/65b62ee8f93c99898aaaf30e",
+					"raw": "localhost:3000/item/65ba309d472c98bac54119a5",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"item",
-						"65b62ee8f93c99898aaaf30e"
+						"65ba309d472c98bac54119a5"
 					]
 				}
 			},

@@ -32,6 +32,7 @@ class Seller {
           });
         item.price_history = [...old.toObject().price_history, {prices: regionalisedPrices}]
         delete item.asking_price;
+        //TODO: fix so this returns history as well resolved.
         const updated = await this.Item.findOneAndUpdate({_id: id}, item, {new: true});
         return updated.toObject();
     }
