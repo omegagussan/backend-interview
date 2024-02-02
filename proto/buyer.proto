@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package buyer;
+
+message BuyerResponse {
+  string name = 1;
+  string description = 2;
+  Price price = 3;
+}
+
+message Price {
+  double value = 1;
+  string currency =2;
+}

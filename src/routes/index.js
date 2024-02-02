@@ -3,6 +3,7 @@ const { allSet } = require('../utils')
 const { buyerSingelton } = require('../services/buyer')
 const { sellerSingelton } = require('../services/seller')
 const { Item } = require('../models');
+const proto = require('../../proto/proto/buyer_pb');
 
 const parseItem = (body) => {
   return { asking_price: body.asking_price || { amount: 0, currency: undefined }, description: body.description || "", images: body.images || [] };
@@ -108,6 +109,7 @@ module.exports = (app) => {
   app.get('/market/:market/item', async (req, res) => {
     try {
       const currency = currencyFromMarket(req.params.market)
+      new proto.buyer.buyerResponse();
       res.status(200).send(await buyerSingelton.getItems(currency))
     } catch (error) {
       if (error.message == "Invalid market") return res.status(400).json({ message: `market ${req.params.market} is not valid.` })
